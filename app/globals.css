@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * SAKFLY design tokens — 02-design-system.md §2 (light) and §21 (dark).
+ * Values are expressed as raw HSL triplets (no `hsl()` wrapper) so Tailwind's
+ * `hsl(var(--token))` consumption in tailwind.config.ts works directly.
+ */
+@layer base {
+  :root {
+    /* §2.2 Primary brand ramp */
+    --primary: 262 83% 46%; /* #6D28D9 */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 263 70% 40%; /* #5B21B6 */
+    --primary-active: 263 69% 33%; /* #4C1D95 */
+    --primary-subtle: 262 100% 97%; /* #F3EBFF */
+    --primary-subtle-foreground: 263 70% 40%;
+
+    /* §2.4 Semantic colors */
+    --success: 160 84% 30%; /* #059669 */
+    --success-subtle: 152 81% 96%;
+    --warning: 32 95% 44%; /* #D97706 */
+    --warning-subtle: 48 100% 96%;
+    --danger: 0 74% 51%; /* #DC2626 */
+    --danger-subtle: 0 86% 97%;
+    --info: 221 83% 53%; /* #2563EB */
+    --info-subtle: 214 100% 97%;
+
+    /* §2.5 Feature accents */
+    --feature-chat: 262 84% 58%; /* #7C3AED */
+    --feature-image: 21 90% 48%; /* #EA580C */
+    --feature-tts: 173 80% 32%; /* #0D9488 */
+    --feature-music: 330 81% 48%; /* #DB2777 */
+
+    /* §2.6 Neutrals & surfaces */
+    --background: 0 0% 100%;
+    --surface: 0 0% 98%;
+    --surface-raised: 0 0% 100%;
+    --border: 220 13% 91%;
+    --border-strong: 216 12% 84%;
+    --foreground: 221 39% 11%;
+    --muted-foreground: 220 9% 46%;
+    --muted-foreground-subtle: 218 11% 65%;
+  }
+
+  /* 02-design-system.md §21 — dark mode token remapping */
+  .dark {
+    --primary: 262 90% 66%; /* #8B5CF6 */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 262 83% 58%;
+    --primary-active: 262 70% 50%;
+    --primary-subtle: 267 45% 15%; /* #241938 */
+    --primary-subtle-foreground: 262 90% 80%;
+
+    --success: 160 84% 39%; /* #10B981 */
+    --success-subtle: 160 40% 12%;
+    --warning: 38 92% 50%; /* #F59E0B */
+    --warning-subtle: 38 40% 12%;
+    --danger: 0 84% 60%; /* #EF4444 */
+    --danger-subtle: 0 40% 14%;
+    --info: 217 91% 60%; /* #3B82F6 */
+    --info-subtle: 217 40% 14%;
+
+    --feature-chat: 262 84% 65%;
+    --feature-image: 21 90% 55%;
+    --feature-tts: 173 70% 40%;
+    --feature-music: 330 81% 58%;
+
+    --background: 240 6% 4%; /* #0A0A0B */
+    --surface: 240 4% 7%; /* #111113 */
+    --surface-raised: 240 4% 10%; /* #18181B */
+    --border: 240 4% 15%; /* #27272A */
+    --border-strong: 240 4% 24%; /* #3F3F46 */
+    --foreground: 0 0% 98%;
+    --muted-foreground: 240 4% 65%;
+    --muted-foreground-subtle: 240 4% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body text-body antialiased;
+  }
+
+  /* 02-design-system.md §22.3 — focus-visible ring is never removed */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* 02-design-system.md §22.3 — skip-to-content link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground;
+  }
+
+  /* Financial/quota figures always render tabular numerals — §3.3 */
+  .font-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
